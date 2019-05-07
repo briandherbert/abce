@@ -8,7 +8,6 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.brianherbert.trystuff.ce.CEResponse
 import com.example.brianherbert.trystuff.ce.Thinker
-import com.example.brianherbert.trystuff.ce.ThoughtContentManager
 import com.google.gson.Gson
 import org.json.JSONObject
 
@@ -21,11 +20,16 @@ class ContentEngine {
             fun onSearchResponse(response: CEResponse?)
         }
 
-        fun search(keyword : String, context: Context, listener: ContentEngineListener) {
+        fun search(keyword: String, context: Context, listener: ContentEngineListener) {
             search(arrayListOf(keyword), context, listener)
         }
 
-        fun search(keywords : ArrayList<String>, context: Context, listener: ContentEngineListener, thinkers : ArrayList<Thinker> = ArrayList()) {
+        fun search(
+            keywords: ArrayList<String>,
+            context: Context,
+            listener: ContentEngineListener,
+            thinkers: ArrayList<Thinker> = ArrayList()
+        ) {
             Log.v(TAG, "searching $keywords with thinkers $thinkers")
 
             var queryStr = ""
@@ -53,7 +57,7 @@ class ContentEngine {
             }
 
             val jsonStr =
-                "{\"context\": {\"id\":\"xyz\",$thinkersStr\"tags\": [$queryStr]}, \"maxThoughts\":1}'"
+                "{\"context\": {\"id\":\"xyz\",$thinkersStr\"tags\": [$queryStr]}, \"maxThoughts\":1}"
 
             Log.v(TAG, "full query $jsonStr")
 
@@ -66,9 +70,12 @@ class ContentEngine {
 
                     if (response != null) {
                         var result = Gson().fromJson(response.toString(), CEResponse::class.java)
-                        Log.v(TAG, "Num results " + result.thoughts.size)
-
-                        listener.onSearchResponse(result)
+                        if (result.thoughts != null) {
+                            Log.v(TAG, "Num results " + result.thoughts.size)
+                            listener.onSearchResponse(result)
+                        } else {
+                            listener.onSearchResponse(null)
+                        }
                     } else {
                         listener.onSearchResponse(null)
                     }

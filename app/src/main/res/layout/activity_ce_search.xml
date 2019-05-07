@@ -39,12 +39,19 @@
         />
 
         <Button
-                android:text="SEARCH"
+                android:text="CE"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/btn_search"
-                android:layout_width="200dp"
+                android:layout_width="100dp"
                 android:layout_margin="8dp"
-                style="@style/Widget.MaterialComponents.Chip.Entry"
+                android:layout_height="wrap_content"/>
+
+        <Button
+                android:text="Tags"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/btn_tags"
+                android:layout_width="100dp"
+                android:layout_margin="8dp"
                 android:layout_height="wrap_content"/>
     </LinearLayout>
 
