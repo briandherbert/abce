@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:background="#fff"
+                android:layout_height="wrap_content">
+
+    <ImageView
+            android:id="@+id/img_thought_icon"
+            android:src="@drawable/ic_verses"
+            android:scaleType="fitCenter"
+            android:padding="20dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"/>
+
+    <ImageView
+            android:id="@+id/img_content_type_icon"
+            android:src="@drawable/ic_audio"
+            android:scaleType="fitCenter"
+            android:layout_alignBottom="@id/img_thought_icon"
+            android:layout_alignRight="@id/img_thought_icon"
+            android:padding="2dp"
+            android:background="#4FFF"
+            android:layout_width="40dp"
+            android:visibility="gone"
+            android:layout_height="40dp"/>
+
+    <TextView
+            android:id="@+id/lbl_thought_desc"
+            android:layout_width="match_parent"
+            android:layout_toRightOf="@id/img_thought_icon"
+            android:textColor="#000"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="This is the title"
+            android:gravity="center_vertical"
+            android:layout_height="80dp"/>
+
+    <com.burningaltar.abcelib.UI.TagsTextView
+            android:id="@+id/tags_tv"
+            android:layout_below="@id/img_thought_icon"
+            android:layout_width="match_parent"
+            tools:text="love joy peace patience kindess goodness"
+            android:gravity="bottom"
+            android:textSize="12sp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:ellipsize="end"
+            android:visibility="visible"
+            android:layout_height="wrap_content"/>
+
+    <View
+            android:layout_below="@id/tags_tv"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="8dp"
+            android:background="#000"/>
+</RelativeLayout>

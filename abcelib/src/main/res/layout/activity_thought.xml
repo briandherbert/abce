@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/container_thought_background"
+             android:background="#A000"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+    <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_margin="40dp"
+            android:background="#FFF"
+            android:layout_height="match_parent">
+        <TextView
+                android:id="@+id/lbl_thought_title"
+                android:text="This is a string that happens to be way"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_margin="8dp"
+                android:textColor="#000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <ImageButton
+                android:id="@+id/btn_thought_play_pause"
+                android:src="@drawable/ic_play"
+                android:layout_width="100dp"
+                android:layout_margin="12dp"
+                android:layout_height="60dp"/>
+
+        <ImageView
+                android:id="@+id/img_thought"
+                android:visibility="gone"
+                android:layout_width="300dp"
+                android:layout_height="300dp"/>
+
+        <TextView
+                android:id="@+id/lbl_thought_content"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:textColor="#000"
+                android:layout_height="200dp"
+                android:scrollbars="vertical"
+                android:layout_weight="1"/>
+    </LinearLayout>
+</FrameLayout>
