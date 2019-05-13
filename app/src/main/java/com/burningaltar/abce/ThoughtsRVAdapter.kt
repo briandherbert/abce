@@ -1,6 +1,5 @@
 package com.burningaltar.abce
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +7,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.burningaltar.abcelib.UI.TagsTextView
+import com.example.brianherbert.biblenavwatch.data.BibleRef
+import com.example.brianherbert.biblenavwatch.data.BibleVersion
 import com.example.brianherbert.trystuff.ce.Thought
 import com.example.brianherbert.trystuff.ce.ThoughtContentManager
+import com.example.utils.bl.BibleFetcher
+import com.example.utils.bl.YVFetcher
+import com.example.utils.data.BiblePassage
 
 class ThoughtsRVAdapter(
     val thoughts: ArrayList<Thought>,
@@ -51,7 +55,7 @@ class ThoughtsRVAdapter(
         fun bind(thought: Thought) {
             v.setOnClickListener { thoughtClickedListener.onThoughtClicked(thought) }
 
-            mImg.setImageResource(thought.thinkerId.defaultIcon)
+            mImg.setImageResource(thought.cacheId.defaultIcon)
 
             var thoughtContent = ThoughtContentManager.getThoughtContent(thought)
 
@@ -63,9 +67,26 @@ class ThoughtsRVAdapter(
                 tags.add(tag.value)
             }
 
+            if (thoughtContent?.getYoutubeId() != null) {
+                mImgContentType.visibility = View.VISIBLE
+                mImgContentType.setImageResource(R.drawable.ic_video)
+            } else if (thoughtContent?.getAudioStreamUrl() != null) {
+                mImgContentType.visibility = View.VISIBLE
+                mImgContentType.setImageResource(R.drawable.ic_audio)
+            } else {
+                mImgContentType.visibility = View.GONE
+            }
+
             mLblSpans.setTags(tags, tagsListener, 7)
 
-
+            // Get verse text
+            if (thoughtContent is ThoughtContentManager.VersesContent) {
+                YVFetcher(mImg.context, object : BibleFetcher.BibleFetcherListener {
+                    override fun onFetched(response: BiblePassage?) {
+                        mDesc.text = response?.content + " " + response?.getHumanRef()
+                    }
+                }).getPassage(BibleRef(BibleVersion.ESV, thoughtContent.ref))
+            }
         }
     }
 }

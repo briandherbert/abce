@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
              android:id="@+id/container_thought_background"
              android:background="#A000"
              android:layout_width="match_parent"
@@ -23,10 +24,19 @@
 
         <ImageButton
                 android:id="@+id/btn_thought_play_pause"
+                tools:visibility="visible"
+                android:visibility="gone"
                 android:src="@drawable/ic_play"
                 android:layout_width="100dp"
                 android:layout_margin="12dp"
                 android:layout_height="60dp"/>
+
+        <com.burningaltar.abcelib.UI.YoutubeWebView
+                android:id="@+id/webview_youtube"
+                android:layout_width="match_parent"
+                tools:visibility="visible"
+                android:visibility="gone"
+                android:layout_height="match_parent" />
 
         <ImageView
                 android:id="@+id/img_thought"
@@ -37,6 +47,8 @@
         <TextView
                 android:id="@+id/lbl_thought_content"
                 android:padding="12dp"
+                tools:visibility="visible"
+                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:gravity="center"
                 android:textColor="#000"

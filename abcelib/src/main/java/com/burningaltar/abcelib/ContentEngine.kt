@@ -70,8 +70,8 @@ class ContentEngine {
 
                     if (response != null) {
                         var result = Gson().fromJson(response.toString(), CEResponse::class.java)
-                        if (result.thoughts != null) {
-                            Log.v(TAG, "Num results " + result.thoughts.size)
+                        if (result.items != null) {
+                            Log.v(TAG, "Num results " + result.items.size)
                             listener.onSearchResponse(result)
                         } else {
                             listener.onSearchResponse(null)

@@ -109,7 +109,7 @@ class ABCEDemoActivity : Activity(), ContentEngine.Companion.ContentEngineListen
             return
         }
 
-        rv_thoughts.adapter = ThoughtsRVAdapter(response.thoughts, this, this)
+        rv_thoughts.adapter = ThoughtsRVAdapter(response.items, this, this)
         Log.v(TAG, response!!.toString())
     }
 

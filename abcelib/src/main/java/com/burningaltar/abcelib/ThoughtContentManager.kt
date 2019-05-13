@@ -14,11 +14,11 @@ class ThoughtContentManager {
         val gson = Gson()
 
         fun getDescription(thought: Thought) : String? {
-            return getThoughtContent(thought.thinkerId, thought.content)?.getTitleText()
+            return getThoughtContent(thought.cacheId, thought.content)?.getTitleText()
         }
 
         fun getThoughtContent(thought: Thought) : ThoughtContent? {
-            return Companion.getThoughtContent(thought.thinkerId, thought.content)
+            return Companion.getThoughtContent(thought.cacheId, thought.content)
         }
 
         fun getThoughtContent(thinker: Thinker, json: JsonObject) : ThoughtContent? {
@@ -64,12 +64,16 @@ class ThoughtContentManager {
 
         abstract fun getContentText() : String
 
-        open fun getAudioStreamUrl() : String {
-            return ""
+        open fun getAudioStreamUrl() : String? {
+            return null
         }
 
         open fun getSeekToTime() : Int {
             return 0
+        }
+
+        open fun getYoutubeId() : String? {
+            return null
         }
     }
 
@@ -97,6 +101,10 @@ class ThoughtContentManager {
 
         override fun getSeekToTime(): Int {
             return (startTimeSeconds * DateUtils.SECOND_IN_MILLIS).toInt()
+        }
+
+        override fun getYoutubeId(): String? {
+            return sermonInfo.youtubeVideoId
         }
     }
 

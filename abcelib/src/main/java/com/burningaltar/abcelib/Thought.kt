@@ -4,7 +4,7 @@ import com.google.gson.JsonObject
 
 data class Thought(
     var id: String,
-    var thinkerId: Thinker,
+    var cacheId: Thinker,
     var intro: String,
     var tags: ArrayList<Tag>,
     var content: JsonObject

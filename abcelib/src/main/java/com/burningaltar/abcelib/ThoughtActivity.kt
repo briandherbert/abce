@@ -5,6 +5,7 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.text.TextUtils
+import android.text.format.DateUtils
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.View
@@ -52,31 +53,38 @@ class ThoughtActivity : Activity() {
     }
 
     fun renderThought(thought: Thought) {
-        Log.v(TAG, "render thought " + thought.thinkerId)
+        Log.v(TAG, "render thought " + thought.cacheId)
 
         var content = ThoughtContentManager.getThoughtContent(thought)
         if (content == null) throw IllegalArgumentException("Unable to parse thought!")
 
         lbl_thought_title.text = content.getTitleText()
-        lbl_thought_content.text = content.getContentText()
-        lbl_thought_content.movementMethod = ScrollingMovementMethod()
 
+        if (!TextUtils.isEmpty(content.getContentText())) {
+            lbl_thought_content.visibility = View.VISIBLE
+            lbl_thought_content.text = content.getContentText()
+            lbl_thought_content.movementMethod = ScrollingMovementMethod()
+        }
+
+        var youtubeId = content.getYoutubeId()
         var audioUrl = content.getAudioStreamUrl()
         var seekTo = content.getSeekToTime()
 
-        if (!TextUtils.isEmpty(audioUrl)) {
+        if (!TextUtils.isEmpty(youtubeId)) {
+            webview_youtube.visibility = View.VISIBLE
+            webview_youtube.setVideoUrl(youtubeId!!, (seekTo / DateUtils.SECOND_IN_MILLIS).toInt())
+        } else if (!TextUtils.isEmpty(audioUrl)) {
             mMediaPlayer = MediaPlayer()
             mMediaPlayer.setDataSource(audioUrl)
             mMediaPlayer.prepare()
             mMediaPlayer.setOnPreparedListener {
                 mMediaPlayer.seekTo(seekTo)
                 mMediaPlayer.setOnSeekCompleteListener {
+                    btn_thought_play_pause.visibility = View.VISIBLE
                     btn_thought_play_pause.setOnClickListener { playPause() }
                     playPause()
                 }
             }
-        } else {
-            btn_thought_play_pause.visibility = View.GONE
         }
     }
 
