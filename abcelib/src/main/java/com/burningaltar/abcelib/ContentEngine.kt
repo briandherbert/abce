@@ -57,7 +57,7 @@ class ContentEngine {
             }
 
             val jsonStr =
-                "{\"context\": {\"id\":\"xyz\",$thinkersStr\"tags\": [$queryStr]}, \"maxThoughts\":1}"
+                "{\"context\": {\"id\":\"xyz\",$thinkersStr\"tags\": [$queryStr]}, \"maxItems\":4}"
 
             Log.v(TAG, "full query $jsonStr")
 
