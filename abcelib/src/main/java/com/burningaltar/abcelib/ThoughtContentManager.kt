@@ -26,7 +26,7 @@ class ThoughtContentManager {
 
             when (thinker) {
                 Thinker.sermon_snippets -> klass = SermonSnippetContent::class.java
-                Thinker.devotions -> klass = DevotionContent::class.java
+                Thinker.reading_plans -> klass = DevotionContent::class.java
                 Thinker.prayers -> klass = PrayerContent::class.java
                 Thinker.reading_plan_days -> klass = ReadingPlanDayContent::class.java
                 Thinker.songs -> klass = SongContent::class.java

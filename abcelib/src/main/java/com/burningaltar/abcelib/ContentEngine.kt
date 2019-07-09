@@ -46,7 +46,7 @@ class ContentEngine {
             var thinkersStr = ""
 
             if (!thinkers.isEmpty()) {
-                thinkersStr = "\"thinkerIds\": ["
+                thinkersStr = "\"cacheIds\": ["
                 isFirst = true
                 for (thinker in thinkers) {
                     if (!isFirst) thinkersStr += ","

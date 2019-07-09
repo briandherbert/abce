@@ -68,7 +68,7 @@ class ABCEDemoActivity : Activity(), ContentEngine.Companion.ContentEngineListen
         var curSearch = txt_search.text.toString().trim()
 
         if (!TextUtils.isEmpty(curSearch)) {
-            if (curSearch.contains(" ")) {
+            if (curSearch.contains(" ") && false) {
                 keywords.addAll(curSearch.split(" "))
             } else {
                 keywords.add(curSearch)
